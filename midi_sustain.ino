@@ -30,14 +30,11 @@ void loop() {
     delay(50); // wait 50ms for the switch to settle, then re-read.
     PedalSTATE      = digitalRead(PedalPIN);
     
-    // output out the state of the pedal:
-    if (PedalSTATE == HIGH ) //sustain off
-    {
+    // issue MIDI Control Change for pedal state
+    if ( PedalSTATE == HIGH ) {         //sustain off
       Serial.println("sustain off");
       MIDI.sendControlChange(64,0,1);
-    }  
-    if (PedalSTATE == LOW ) //sustain on
-    {
+    } else { //( PedalSTATE == LOW )    //sustain on 
       Serial.println("sustain on");
       MIDI.sendControlChange(64,127,1);
     }
